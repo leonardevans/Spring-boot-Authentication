@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <style>
+        body{
+            background-color: #161b22;
+            display: flex;
+            justify-content: center;
+        }
+
+        h3{
+            background-color: aqua;
+            padding: 5px;
+            border-radius: 5px 5px 0px 0px;
+        }
+        .form-input{
+            margin: 5px 0px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+        .result, .signed-up{
+            color: rgb(224, 10, 10);
+        }
+        input{
+            width: 95%;
+            text-align: center;
+            padding: 5px;
+            align-self: center;
+        }
+
+        section{
+            background-color: white;
+            width: 100%;
+            text-align: center;
+        }
+
+        input[type=submit]{
+            background-color: aqua;
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            width: 100%;
+        }
+
+        input[type=submit]:hover{
+            background-color: #161b22;
+            color: aqua;
+            cursor: pointer;
+        }
+
+        .signed-up{
+            color: green;
+        }
+
+        @media  only screen and (min-width: 800px) {
+            section{
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+<section>
+    <h3>LOGIN</h3>
+    <form th:action="@{/login}" method="post">
+        <!--error message-->
+        <div th:if="${param.error}"
+             th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
+            <div class="result" th:text="${errorMsg}">
+                Invalid email or password
+            </div>
+        </div>
+
+        <!--logout message-->
+        <div th:if="${param.logout}">
+            <div class="signed-up">
+                You have been logged out.
+            </div>
+        </div>
+
+        <div class="form-input">
+            <input type="text" name="username" id="username" placeholder="EMAIL">
+        </div>
+        <div class="form-input">
+            <input type="password" name="password" id="password" placeholder="PASSWORD">
+        </div>
+        <div class="form-input">
+            <input type="submit" value="LOGIN">
+        </div>
+    </form>
+    <a th:href="@{/sign-up}">Sign Up</a>
+</section>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body{
+            background-color: #161b22;
+            display: flex;
+            justify-content: center;
+        }
+        
+        h3{
+            background-color: aqua;
+            padding: 5px;
+            border-radius: 5px 5px 0px 0px;
+        }
+        .form-input{
+            margin: 5px 0px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+        .result, .signed-up{
+            color: rgb(224, 10, 10);
+        }
+
+        input{
+            width: 95%;
+            text-align: center;
+            padding: 5px;
+            align-self: center;
+        }
+
+        section{
+            background-color: white;
+            width: 100%;
+            text-align: center;
+        }
+
+        input[type=submit]{
+            background-color: aqua;
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            width: 100%;
+        }
+
+        input[type=submit]:hover{
+            background-color: #161b22;
+            color: aqua;
+            cursor: pointer;
+        }
+
+        .signed-up{
+            color: green;
+        }
+
+        @media  only screen and (min-width: 800px) {
+            section{
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h3>Sign Up</h3>
+        <form th:action="@{/sign-up}" method="post" th:object="${user}">
+            <div class="form-input">
+                <small class="result" th:if="${param.register_success}">
+
+                </small>
+                <small class="signed-up" th:if="${param.register_success}">
+                    You've successfully registered an account. We have sent you a link to confirm your email and then you can login with your credentials!
+                </small>
+            </div>
+            <div class="form-input">
+                <input type="text" name="fullName" id="fullName" placeholder="Full Name" th:field="*{fullName}">
+                <small class="result" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></small>
+            </div>
+            <div class="form-input">
+                <input type="text" name="email" id="email" placeholder="EMAIL" th:field="*{email}">
+                <small class="result" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+            </div>
+            <div class="form-input">
+                <input type="password" name="password" id="password" placeholder="PASSWORD" th:field="*{password}">
+                <small class="result" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+            </div>
+            <div class="form-input">
+                <input type="password" name="confirm-password" id="confirm-password" placeholder="CONFIRM-PASSWORD" th:field="*{confirmPassword}">
+                <small class="result"></small>
+            </div>
+            <div class="form-input">
+                <input type="submit" value="SIGN UP">
+            </div>
+        </form>
+        <a th:href="@{/login}">Login</a>
+    </section>
+</body>
+</html>

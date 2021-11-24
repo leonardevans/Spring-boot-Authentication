@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body{
+            background-color: #161b22;
+            display: flex;
+            justify-content: center;
+        }
+
+        h3{
+            background-color: aqua;
+            padding: 5px;
+            border-radius: 5px 5px 0px 0px;
+        }
+        .form-input{
+            margin: 5px 0px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+        .result, .signed-up{
+            color: rgb(224, 10, 10);
+        }
+        input{
+            width: 95%;
+            text-align: center;
+            padding: 5px;
+            align-self: center;
+        }
+
+        section{
+            background-color: white;
+            width: 100%;
+            text-align: center;
+        }
+
+        input[type=submit]{
+            background-color: aqua;
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            width: 100%;
+        }
+
+        input[type=submit]:hover{
+            background-color: #161b22;
+            color: aqua;
+            cursor: pointer;
+        }
+
+        @media  only screen and (min-width: 800px) {
+            section{
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+<section>
+    <h3>Welcome <strong sec:authentication="name"></strong></h3>
+    <a th:href="@{/logout}">Logout</a>
+
+</section>
+</body>
+</html>
